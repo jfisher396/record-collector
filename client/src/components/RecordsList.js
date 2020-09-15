@@ -1,29 +1,45 @@
-import axios from 'axios'
 import React, { Component } from 'react';
+import API from '../utils/API';
 
 export default class RecordsList extends Component {
 
+    state = {
+        result: {},
+        search: ""
+    }
 
     componentDidMount() {
-        this.loadData()
+        this.searchAlbums("Master of Puppets")
     }
 
-    loadData = () => {
-        axios
-          .get("https://www.theaudiodb.com/api/v1/json/1/searchalbum.php?a=metallica")
+    searchAlbums = (query) => {
+        API.search(query)
           .then((result) => {
-            console.log(result);
-          });
+            console.log(result.data.album);
+          })
+          .catch((err) => console.log(err));
     }
-
-
-
 
     render() {
         return (
-            <div>
-                <h1>This is my records list</h1>
-            </div>
-        )
+          <div className="container-fluid">
+            <h1>Records:</h1>
+            <table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Title:</th>
+                  <th scope="col">Artist:</th>
+                  <th scope="col">Release year:</th>
+                  <th scope="col">Artwork:</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
     }
 }
