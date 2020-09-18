@@ -7,8 +7,8 @@ export default {
     return axios.get(albumURL + query);
   },
 
-  saveBook: function (bookData) {
-    return axios.post("/api/books", bookData);
+  saveAlbum: function (albumData) {
+    return axios.post("/api/albums", albumData);
   },
 
   deleteBook: function (id) {

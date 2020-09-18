@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const recordRoutes = require("./records");
+const albumRoutes = require("./albums");
 
 // Record routes
-router.use("/records", recordRoutes);
+router.use("/albums", albumRoutes);
 
 module.exports = router;
