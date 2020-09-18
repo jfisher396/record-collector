@@ -34,14 +34,28 @@ export default class SearchList extends Component {
     this.searchAlbums(this.state.search);
   };
 
+  handleButtonClick = (event) => {
+    event.preventDefault();
+    console.log(this.state.results[0].strArtist)
+    API.saveAlbum({
+      artwork: this.state.results[0].strAlbumThumb,
+      title: this.state.results[0].strAlbum,
+      artist: this.state.results[0].strArtist,
+      releaseYear: this.state.results[0].intYearReleased,
+      genre: this.state.results[0].strStyle,
+    }).catch((err) => console.log(err));
+  };
+
   render() {
     return (
       <div className="container-fluid">
-        <SearchForm
-          value={this.state.search}
-          handleInputChange={this.handleInputChange}
-          handleFormSubmit={this.handleFormSubmit}
-        />
+        <div>
+          <SearchForm
+            value={this.state.search}
+            handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
+          />
+        </div>
         <h1>Search Results:</h1>
         <table className="table">
           <thead>
@@ -70,7 +84,10 @@ export default class SearchList extends Component {
                   <td>{record.intYearReleased}</td>
                   <td>{record.strStyle}</td>
                   <td>
-                    <button className="btn btn-primary mt-5">
+                    <button
+                      onClick={this.handleButtonClick}
+                      className="btn btn-primary mt-5"
+                    >
                       Add to collection
                     </button>
                   </td>

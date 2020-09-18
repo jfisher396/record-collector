@@ -1,3 +1,3 @@
 module.exports = {
-  Record: require("./record"),
+  Album: require("./album"),
 };

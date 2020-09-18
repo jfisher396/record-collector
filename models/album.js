@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const recordSchema = new Schema({
+const albumSchema = new Schema({
   artwork: { type: String },
   title: { type: String },
   artist: { type: String },
@@ -9,6 +9,6 @@ const recordSchema = new Schema({
   genre: { type: String },
 });
 
-const Record = mongoose.model("Record", recordSchema);
+const Album = mongoose.model("Album", albumSchema);
 
-module.exports = Record;
+module.exports = Album;
