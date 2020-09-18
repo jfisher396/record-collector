@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import SearchForm from "./SearchForm"
 
-export default class RecordsList extends Component {
+export default class SearchList extends Component {
   state = {
     results: [],
     search: "",
   };
 
-  componentDidMount() {
-    this.searchAlbums("Far Beyond Driven");
-  }
+  // componentDidMount() {
+  //   this.searchAlbums("Far Beyond Driven");
+  // }
 
   searchAlbums = (query) => {
     API.search(query)
@@ -20,11 +21,28 @@ export default class RecordsList extends Component {
       .catch((err) => console.log(err));
   };
 
+  handleInputChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    this.searchAlbums(this.state.search);
+  };
+
   render() {
-    
     return (
       <div className="container-fluid">
-        <h1>Results:</h1>
+        <SearchForm
+          value={this.state.search}
+          handleInputChange={this.handleInputChange}
+          handleFormSubmit={this.handleFormSubmit}
+        />
+        <h1>Search Results:</h1>
         <table className="table">
           <thead>
             <tr>
@@ -51,7 +69,11 @@ export default class RecordsList extends Component {
                   <td>{record.strArtist}</td>
                   <td>{record.intYearReleased}</td>
                   <td>{record.strStyle}</td>
-                  <td><button className="btn btn-primary mt-3">Add to collection</button></td>
+                  <td>
+                    <button className="btn btn-primary mt-5">
+                      Add to collection
+                    </button>
+                  </td>
                 </tr>
               );
             })}

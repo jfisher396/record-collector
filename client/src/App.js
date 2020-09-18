@@ -1,12 +1,12 @@
 import React from 'react';
-import RecordsList from './components/RecordsList';
+import SearchList from './components/SearchList';
 
 // console.log(process.env.REACT_APP_API_KEY);
 
 function App() {
   return (
     <div className="App">
-      <RecordsList />
+      <SearchList />
     </div>
   );
 }
