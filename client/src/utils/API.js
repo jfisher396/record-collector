@@ -11,7 +11,7 @@ export default {
     return axios.post("/api/albums", albumData);
   },
 
-  deleteBook: function (id) {
-    return axios.delete("/api/books/" + id);
+  deleteAlbum: function (id) {
+    return axios.delete("/api/albums/" + id);
   },
 };

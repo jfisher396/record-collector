@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import API from "../utils/API"
 
 export default class SavedAlbums extends Component {
   state = {
@@ -8,27 +9,28 @@ export default class SavedAlbums extends Component {
   componentDidMount() {
     this.albumApi();
   }
+
+  componentDidUpdate() {
+    this.albumApi();
+  }
   albumApi() {
     axios.get("/api/albums").then((response) => {
       return this.setState({ albums: response.data });
     });
   }
 
-  componentDidUpdate() {
-      this.albumApi();
-  }
-  
-  // handleButtonClick = (id) => {
-  //     API.deleteAlbum(id)
-  //         .then(this.albumApi())
+  handleButtonClick = (id) => {
+      API.deleteAlbum(id)
+          .then(this.albumApi())
 
-  // }
+  }
 
   render() {
     const { albums } = this.state;
     return (
       <>
-        <div>
+        <div className="container-fluid">
+          <h1>Records in collection:</h1>
           <table className="table">
             <thead>
               <tr>
@@ -59,7 +61,7 @@ export default class SavedAlbums extends Component {
                     <td>
                       <button
                         onClick={() => this.handleButtonClick(item._id)}
-                        className="btn btn-primary mt-3"
+                        className="btn btn-danger mt-3"
                       >
                         Remove
                       </button>
